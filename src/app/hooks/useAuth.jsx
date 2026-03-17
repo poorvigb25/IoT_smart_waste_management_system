@@ -11,6 +11,9 @@ export const AuthProvider = ({ children }) => {
     // Get active session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
+    }).catch(error => {
+      console.error("Error getting session:", error);
+    }).finally(() => {
       setLoading(false);
     });
 
